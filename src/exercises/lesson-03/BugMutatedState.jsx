@@ -13,8 +13,7 @@ export default function BugMutatedState() {
   let [count, setCount] = useState(0);
 
   function handleAdd() {
-    count++;
-    setCount(count);
+    setCount(count => count + 1);
   }
 
   return (
@@ -26,4 +25,5 @@ export default function BugMutatedState() {
 }
 
 // Explanation:
-// (Write your explanation here)
+// Prevented stale value bugs 
+//used setState to make sure updates are based on the latest state value

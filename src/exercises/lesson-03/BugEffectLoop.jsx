@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 //src/exercises/lesson-03/BugEffectLoop.jsx
 
 /* 
@@ -12,13 +13,15 @@ import { useEffect, useState } from 'react';
 
 export default function BugEffectLoop() {
   const [count, setCount] = useState(0);
-
+  
   useEffect(() => {
-    setCount(count + 1);
-  });
+    setCount(count => count + 1);
+  },[]);
 
   return <p>Bug 1 Count: {count}</p>;
 }
 
 // Explanation:
-// (Write your explanation here)
+//added a dependency array
+//State updated happens only once
+//avoids stale value bug
