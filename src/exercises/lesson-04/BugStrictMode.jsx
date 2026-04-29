@@ -7,11 +7,13 @@ export default function BugStrictMode() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    setInterval(() => {
-      setCount((c) => c + 1);
+      const interval = setInterval(() => {
+        setCount((c) => c + 1);
     }, 1000);
-  }, []);
 
+    return () => clearInterval(interval);
+  }, []);
+  
   return (
     <div>
       <h2>StrictMode Timer Bug</h2>
@@ -21,3 +23,4 @@ export default function BugStrictMode() {
 }
 
 // Write your explanation of how StrictMode helps us catch this bug
+// stored interval ID. Used the cleanup function when the component unmounts
