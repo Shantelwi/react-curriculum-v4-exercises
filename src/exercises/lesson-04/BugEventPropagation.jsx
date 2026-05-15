@@ -25,3 +25,5 @@ export default function BugEventPropagation() {
     </>
   );
 }
+
+// added preventDefault(); and stopPropagation(); events 
