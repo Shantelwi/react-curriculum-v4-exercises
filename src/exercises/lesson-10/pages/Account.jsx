@@ -8,6 +8,10 @@ export default function Account({ user }) {
         If you can see this page, you are logged in as{' '}
         <strong>{user.firstName}</strong>.
       </p>
+
+      <div style={{ marginTop: 12 }}>
+        <Link to="/">Go Home</Link>
+      </div>
     </section>
   );
 }
