@@ -3,7 +3,7 @@
 
 export default function StudentWork() {
   //add variables here
-  let f_name = 'Shantel';
+  let firstName = 'Shantel';
   let age = 28;
   let hobbies = [
     { id: 1, title: 'biking' },
@@ -16,23 +16,19 @@ export default function StudentWork() {
   return (
     <div>
       <h1>About Me</h1>
-      {
-        <>
-          {' '}
-          Hello My name is {f_name}. I am {age}, These are some of my hobbies
-          that I enjoy when I can.
-          <ul>
-            {hobbies.map((hobbies) => (
-              <li key={hobbies.id}>{hobbies.title}</li>
-            ))}
-          </ul>
-        </>
-      }
       <p>
-        {' '}
+        Hello my name is {firstName}. I am {age}, These are some of my hobbies
+        that I enjoy when I can.
+        <ul>
+          {hobbies.map((hobby) => (
+            <li key={hobby.id}>{hobby.title}</li>
+          ))}
+        </ul>
+      </p>
+      <p>
         I am currently in a Coding program learning front and back end software
-        development. Some expectations for the future is to gain an
-        apprecticeship and then move on to being a full time developer.
+        development. Some expectations for the future are to gain an
+        apprenticeship and then move on to being a full time developer.
       </p>
     </div>
   );
