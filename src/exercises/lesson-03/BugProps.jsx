@@ -11,12 +11,13 @@
 
   Use the commented "Explanation" section at the bottom of this lesson's components.
 */
+import { useState } from 'react';
 
-export default function BugProps({ name = 'friend' }) {
-  let message = 'Hello, ' + name;
+function BugProps({ name = 'friend' }) {
+  const [message, setMessage] = useState('Hello, ' + name);
 
   function handleChange() {
-    message = 'Hi, ' + name + '!';
+    setMessage('Hi, ' + name + '!');
   }
 
   return (
@@ -27,5 +28,8 @@ export default function BugProps({ name = 'friend' }) {
   );
 }
 
+export default BugProps;
+
 // Explanation:
 // (Write your explanation here)
+// the original code changed message directly. Needed to import and update state. React re-renders when state changes, allowing the greeting to update when the button is clicked.
