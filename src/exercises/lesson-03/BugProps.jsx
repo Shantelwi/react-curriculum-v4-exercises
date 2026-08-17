@@ -1,5 +1,7 @@
 // src/exercises/lesson-03/BugProps.jsx
 
+import { useState } from 'react';
+
 /*
   BUG #3 — Props Not Updating
 
@@ -13,10 +15,10 @@
 */
 
 export default function BugProps({ name = 'friend' }) {
-  let message = 'Hello, ' + name;
+  const [message, setMessage] = useState('Hello, ' + name);
 
   function handleChange() {
-    message = 'Hi, ' + name + '!';
+    setMessage('Hi, ' + name + '!');
   }
 
   return (
