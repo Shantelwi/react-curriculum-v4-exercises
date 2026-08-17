@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/refs */
 // TOPIC: Choose the correct tool: useRef vs useState
 // TASK: Make sure it updates the text *without* triggering a re-render
 import { useRef } from 'react';
