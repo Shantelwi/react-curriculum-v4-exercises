@@ -1,16 +1,28 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import Home from './pages/Home.jsx';
+import Checkout from './pages/Checkout.jsx';
+import ProductDetails from './pages/ProductDetails.jsx';
+import Account from './pages/Account.jsx';
+import NotFound from './pages/NotFound.jsx';
+import productsData from './data/products.js';
 
 import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
+import { Routes, Route } from 'react-router-dom';
 
 export default function StudentWork() {
+  const [products] = useState(productsData);
+
   const [user, setUser] = useState({
     isLoggedIn: true,
     firstName: 'Avery',
   });
 
   function toggleLogin() {
-    setUser((u) => ({ ...u, isLoggedIn: !u.isLoggedIn }));
+    setUser((prev) => ({
+      ...prev,
+      isLoggedIn: !prev.isLoggedIn,
+    }));
   }
 
   return (
@@ -39,7 +51,19 @@ export default function StudentWork() {
 
       <Header user={user} />
 
-      <main style={{ padding: 12 }}></main>
+      <main style={{ padding: 12 }}>
+        <Routes>
+          <Route path="/" element={<Home products={products} />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/products/:id" element={<ProductDetails />} />
+
+          {user.isLoggedIn && (
+            <Route path="/account" element={<Account user={user} />} />
+          )}
+
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </main>
 
       <Footer />
     </div>
