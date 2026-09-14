@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/set-state-in-effect */
+import { useState, useEffect } from 'react';
 import styles from './SnackForm.module.css';
 import { useState, useEffect } from 'react';
 
@@ -17,6 +18,7 @@ export default function SnackForm({
     rating:false 
   });
 
+  const [touched, setTouched] = useState({ name: false, rating: false });
   const isEditing = Boolean(editingSnack);
 
   useEffect(() => {
@@ -37,6 +39,47 @@ export default function SnackForm({
     const isValid = validateName() && validateRating();
     if (!isValid){
       setTouched({name:true, rating:true});
+      setRating(String(editingSnack.rating));
+    } else {
+      setName('');
+      setRating('');
+    }
+    setTouched({ name: false, rating: false });
+  }, [editingSnack]);
+
+  function validateName() {
+    return name.trim() !== '';
+  }
+
+  function validateRating() {
+    return rating !== '';
+  }
+
+  function getNameError() {
+    if (touched.name && !validateName()) {
+      return 'Snack name is required';
+    }
+    return '';
+  }
+
+  function getRatingError() {
+    if (touched.rating && !validateRating()) {
+      return 'Please select a rating';
+    }
+    return '';
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const nameValid = validateName();
+    const ratingValid = validateRating();
+
+    if (!nameValid || !ratingValid) {
+      setTouched({
+        name: true,
+        rating: true,
+      });
       return;
     }
 
@@ -46,6 +89,11 @@ export default function SnackForm({
       addSnack(name, rating);
       setName('');
       setRating('');
+
+      // Reset controlled form state
+      setName('');
+      setRating('');
+      setTouched({ name: false, rating: false });
     }
   }
   
@@ -75,6 +123,9 @@ export default function SnackForm({
     return '';
   }
 
+  const nameError = getNameError();
+  const ratingError = getRatingError();
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -86,6 +137,7 @@ export default function SnackForm({
 
       <div className={styles['field-container']}>
         <label className={styles['field-label']}>Name:</label>
+
         <input
           type="text"
           name="name"
@@ -98,16 +150,26 @@ export default function SnackForm({
         {getNameError () && (
           <div className={styles.error}>{getNameError()}</div>
         )}
+          onFocus={() => setTouched((prev) => ({ ...prev, name: true }))}
+          className={styles['field-input']}
+          placeholder="Enter snack name"
+        />
+
+        {nameError && <div className={styles.error}>{nameError}</div>}
       </div>
 
       <div className={styles['field-container']}>
         <label className={styles['field-label']}>Rating:</label>
+
         <input
           type="number"
           name="rating"
           value = {rating}
           onChange={(e) => setRating(e.target.value)}
           onFocus={() => setTouched((prev) => ({...prev, rating:true}))}
+          value={rating}
+          onChange={(e) => setRating(e.target.value)}
+          onFocus={() => setTouched((prev) => ({ ...prev, rating: true }))}
           min="1"
           max="5"
           className={styles['field-input']}
@@ -116,6 +178,8 @@ export default function SnackForm({
         {getRatingError() && (
           <div className={styles.error}>{getRatingError()}</div>
         )}
+
+        {ratingError && <div className={styles.error}>{ratingError}</div>}
       </div>
 
       <div className={styles['button-container']}>

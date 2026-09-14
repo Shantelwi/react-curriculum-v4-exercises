@@ -1,15 +1,23 @@
-export default function SnackList() {
-    const snackArray = [
-        {rank: 5, name: 'Peanut Butter Protein Bar'},
-        {rank: 4, name: 'Sour gummy worms'},
-        {rank: 3, name: 'Lays w/ Hotsauce'},
-        {rank: 2, name: 'Chocolate Chip Cookies'},
-        {rank: 1, name: 'PB&J Sandwich'}
-    ]
-    const sortedSnacks = snackArray.toSorted();
-    return (
-        <div>
-            {sortedSnacks.map(snack => <li key={snack.rank}>{snack.name}</li>)}
+function SnackList() {
+  const snacks = [
+    { name: 'popcorn', rank: 3 },
+    { name: 'Twix', rank: 2 },
+    { name: 'Granola', rank: 4 },
+    { name: 'Fruit', rank: 1 },
+    { name: 'Cake', rank: 5 },
+  ];
+
+  const ranked = snacks.toSorted((a, b) => a.rank - b.rank);
+
+  return (
+    <>
+      {ranked.map((item) => (
+        <div key={item.name}>
+          {item.name}: {item.rank}
         </div>
-    );
+      ))}
+    </>
+  );
 }
+
+export default SnackList;

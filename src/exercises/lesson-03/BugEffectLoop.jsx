@@ -15,13 +15,12 @@ export default function BugEffectLoop() {
   const [count, setCount] = useState(0);
   
   useEffect(() => {
-    setCount(count => count + 1);
-  },[]);
+    setCount((previous) => previous + 1);
+  }, []);
 
   return <p>Bug 1 Count: {count}</p>;
 }
 
 // Explanation:
-//added a dependency array
-//State updated happens only once
-//avoids stale value bug
+// (Write your explanation here)
+// The effect caused an infinite loop because it depended on count. I changed the dependency array to an empty array so it runs once when the component mounts.

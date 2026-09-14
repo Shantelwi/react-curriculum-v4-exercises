@@ -4,6 +4,10 @@
 import BugEffectLoop from "./BugEffectLoop.jsx";
 import BugProps from "./BugProps.jsx";
 import BugMutatedState from "./BugMutatedState.jsx"
+import BugEffectLoop from './BugEffectLoop';
+import BugMutatedState from './BugMutatedState';
+import BugProps from './BugProps';
+
 export default function StudentWork() {
   return (
     <div>
@@ -11,6 +15,8 @@ export default function StudentWork() {
       <BugEffectLoop />
       <BugProps />
       <BugMutatedState/>
+      <BugMutatedState />
+      <BugProps />
       <p>Student output will go here</p>
     </div>
   );
