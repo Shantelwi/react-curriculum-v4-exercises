@@ -1,6 +1,7 @@
 //Lesson-08 Advanced Hooks: useCallback and useMemo, Optimizing a React App
 //Exercise: Book Library Dashboard Performance Optimization
 
+import { useState, useCallback } from 'react';
 import { useCallback, useState } from 'react';
 import { bookData, getAllGenres, filterBooksByGenre } from './bookData.js';
 import {

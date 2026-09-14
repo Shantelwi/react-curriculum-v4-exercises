@@ -7,6 +7,14 @@ export default function BugStrictMode() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
+    const interval= setInterval(() => {
+      setCount((c) => c + 1);
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    }
+  }, []);
     const incrementBy1 = setInterval(() => {
       setCount((count) => count + 1);
     }, 1000);
@@ -25,4 +33,5 @@ export default function BugStrictMode() {
 }
 
 // Write your explanation of how StrictMode helps us catch this bug
+//added a cleanup function, and put the set interval in a variable.
 //StrictMode helps us catch this bug because it runs the logic twice to detect side effects and any other issues in early development.

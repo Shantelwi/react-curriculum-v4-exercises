@@ -2,11 +2,13 @@
 // TASK: Ensure only the inner button's action triggers an alert when the button is pushed
 
 export default function BugEventPropagation() {
-  function handleOuterClick() {
+  function handleOuterClick(e) {
+    e.preventDefault();
     alert("RED BOX CLICKED ❌ Don't show me!");
   }
 
   function handleInnerClick(e) {
+    e.preventDefault();
     e.stopPropagation();
     alert('Button Clicked ✅');
   }
@@ -23,3 +25,5 @@ export default function BugEventPropagation() {
     </>
   );
 }
+
+// added preventDefault(); and stopPropagation(); events 

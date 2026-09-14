@@ -15,6 +15,14 @@ import { useState } from 'react';
 */
 import { useState } from 'react';
 
+import { useState } from 'react';
+
+export default function BugProps({ name = 'friend' }) {
+
+  const [message, setMessage] = useState('Hello, ' + name);
+
+  function handleChange() {
+    setMessage( 'Hi, ' + name + '!');
 function BugProps({ name = 'friend' }) {
   const [message, setMessage] = useState('Hello, ' + name);
 
@@ -33,5 +41,8 @@ function BugProps({ name = 'friend' }) {
 export default BugProps;
 
 // Explanation:
+// imported useState to be able to manage values through state 
+/*  Adjusted the component so the `message` is stored in a way React 
+can monitor, allowing the UI to update when the button is clicked. **/
 // (Write your explanation here)
 // the original code changed message directly. Needed to import and update state. React re-renders when state changes, allowing the greeting to update when the button is clicked.

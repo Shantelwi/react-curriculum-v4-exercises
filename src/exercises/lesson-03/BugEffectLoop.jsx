@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 //src/exercises/lesson-03/BugEffectLoop.jsx
 
 /* 
@@ -12,7 +13,7 @@ import { useEffect, useState } from 'react';
 
 export default function BugEffectLoop() {
   const [count, setCount] = useState(0);
-
+  
   useEffect(() => {
     setCount((previous) => previous + 1);
   }, []);

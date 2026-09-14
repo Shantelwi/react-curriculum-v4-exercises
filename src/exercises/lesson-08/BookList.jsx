@@ -5,6 +5,7 @@ import {
 } from '../../private/components/renderCounter.jsx';
 import BookCard from './BookCard.jsx';
 import styles from './BookList.module.css';
+import { useMemo } from 'react';
 
 // Book List Component - Expensive sorting operation runs on every render
 function BookList({ books, sortBy, favorites, onToggleFavorite }) {
@@ -13,6 +14,7 @@ function BookList({ books, sortBy, favorites, onToggleFavorite }) {
   // TODO #3: Optimize this expensive sorting operation with useMemo
   // This sorting runs on every render, even when books haven't changed
   const sortedBooks = useMemo(() => {
+    return [...books].sort((a, b) => {
     return books.toSorted((a, b) => {
       switch (sortBy) {
         case 'title':
