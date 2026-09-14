@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import {
   useRenderCounter,
   RenderCounter,
@@ -14,6 +15,7 @@ function BookList({ books, sortBy, favorites, onToggleFavorite }) {
   // This sorting runs on every render, even when books haven't changed
   const sortedBooks = useMemo(() => {
     return [...books].sort((a, b) => {
+    return books.toSorted((a, b) => {
       switch (sortBy) {
         case 'title':
           return a.title.localeCompare(b.title);

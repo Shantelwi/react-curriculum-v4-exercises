@@ -15,6 +15,14 @@ export default function BugStrictMode() {
       clearInterval(interval);
     }
   }, []);
+    const incrementBy1 = setInterval(() => {
+      setCount((count) => count + 1);
+    }, 1000);
+
+    return () => {
+      clearInterval(incrementBy1);
+    };
+  }, [count]);
 
   return (
     <div>
@@ -26,3 +34,4 @@ export default function BugStrictMode() {
 
 // Write your explanation of how StrictMode helps us catch this bug
 //added a cleanup function, and put the set interval in a variable.
+//StrictMode helps us catch this bug because it runs the logic twice to detect side effects and any other issues in early development.

@@ -10,20 +10,22 @@
 
 import { useState } from 'react';
 export default function BugMutatedState() {
-  let [count, setCount] = useState(0);
+  const [count, setCount] = useState(0);
 
   function handleAdd() {
-    setCount(count => count + 1);
+    setCount((prev) => prev + 1);
   }
 
   return (
     <div>
       <p>Bug 2 Count: {count}</p>
-      <button onClick={handleAdd}>Add 1</button>
+      <button type="button" onClick={handleAdd}>
+        Add 1
+      </button>
     </div>
   );
 }
 
 // Explanation:
-// Prevented stale value bugs 
-//used setState to make sure updates are based on the latest state value
+// (Write your explanation here)
+//The bug happened because it was directly mutating the count state with count++. Instead I used the state setter to calculate the next value from the previous state.

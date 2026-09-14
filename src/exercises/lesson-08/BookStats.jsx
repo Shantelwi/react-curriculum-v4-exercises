@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import {
   useRenderCounter,
   RenderCounter,
@@ -12,7 +13,7 @@ function BookStats({ books }) {
   // TODO #4: Optimize these expensive calculations with useMemo
   // These calculations run every time the component renders,
   // even when the books array hasn't changed
-  const calculateStats = () => {
+  const calculateStats = useMemo(() => {
     // eslint-disable-next-line react-hooks/purity
     const startTime = performance.now();
 
@@ -88,9 +89,10 @@ function BookStats({ books }) {
       microseconds: microseconds.toFixed(2),
       _dummy: dummy, // Prevent optimization from removing our timing code
     };
-  };
+  }, [books]);
 
   const stats = useMemo(() => calculateStats(), [books]);
+  const stats = () => calculateStats();
 
   return (
     <div className={styles.statsContainer}>
